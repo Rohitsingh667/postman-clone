@@ -1,12 +1,12 @@
-import { MikroORM, EntityManager, PostgreSqlDriver } from '@mikro-orm/postgresql';
+import { MikroORM, EntityManager } from '@mikro-orm/core';
 import config from '../../mikro-orm.config';
 
-let ormInstance: MikroORM<PostgreSqlDriver> | null = null;
+let ormInstance: MikroORM | null = null;
 let schemaSyncDone = false;
 
-export async function getOrm() {
+export async function getOrm(): Promise<MikroORM> {
   if (!ormInstance) {
-    ormInstance = await MikroORM.init<PostgreSqlDriver>(config);
+    ormInstance = await MikroORM.init(config);
   }
   if (!schemaSyncDone) {
     try {
