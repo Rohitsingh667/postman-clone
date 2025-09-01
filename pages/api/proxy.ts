@@ -46,7 +46,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     response.headers.forEach((v, k) => { respHeaders[k] = v; });
 
     const em = await getEm();
-    const log = em.create('RequestLog' as any, { id: randomUUID(),
+    const id = randomUUID();
+    const log = em.create('RequestLog' as any, { id,
       method,
       url,
       requestHeaders: sanitizeHeaders(headers),
@@ -63,7 +64,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       headers: respHeaders,
       body: respText,
       durationMs: duration,
-      logId: log.id,
+      logId: id,
     });
   } catch (e: any) {
     return res.status(500).json({ error: e?.message || 'Internal error' });
