@@ -85,7 +85,7 @@ export default function RestClient() {
       let headers: Record<string, string> | undefined = undefined;
       if (headersText.trim()) headers = JSON.parse(headersText);
       let body: any = undefined;
-      if (method !== 'GET' && method !== 'HEAD' && bodyText) {
+      if (method !== 'GET' && bodyText) {
         body = bodyIsJson ? JSON.parse(bodyText) : bodyText;
         headers = headers || {};
         if (bodyIsJson && !('content-type' in Object.fromEntries(Object.entries(headers).map(([k,v])=>[k.toLowerCase(), v])))) {

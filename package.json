@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "engines": { "node": "20.x" },
   "description": "",
   "dependencies": {
     "@mikro-orm/core": "^6.5.1",
